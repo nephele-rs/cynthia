@@ -2,6 +2,9 @@
 name = "cynthia-macros"
 version = "0.0.1"
 edition = "2018"
+description = """
+cynthia's proc macros.
+"""
 
 [lib]
 proc-macro = true
