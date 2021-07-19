@@ -16,4 +16,4 @@ syn = { version = "1.0", features = ["full"] }
 quote = "1.0"
 
 [dev-dependencies]
-cynthia = { version = "0.0.1" }
+cynthia = { version = "0.0.2" }
