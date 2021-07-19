@@ -3,6 +3,7 @@ name = "cynthia-macros"
 version = "0.0.1"
 edition = "2018"
 description = """
+license = "MIT/Apache-2.0"
 cynthia's proc macros.
 """
 
