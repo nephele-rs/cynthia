@@ -1,6 +1,6 @@
 [package]
 name = "cynthia"
-version = "0.0.2"
+version = "0.0.3"
 authors = ["inkhare <iapricot@foxmail.com>"]
 description = "A high performance asynchronous programming runtime for Rust."
 edition = "2018"
