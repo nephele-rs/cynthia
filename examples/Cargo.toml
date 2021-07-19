@@ -28,6 +28,10 @@ tempfile = "3.1.0"
 url = "2.1.1"
 
 [[example]]
+name = "channel"
+path = "channel.rs"
+
+[[example]]
 name = "tcp_echo"
 path = "tcp_echo.rs"
 

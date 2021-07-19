@@ -5,11 +5,10 @@ use cynthia::runtime::swap;
 use cynthia::runtime::transport::TcpStream;
 use cynthia::runtime::polling::{Event, Poller};
 
-fn main() -> swap::Result<()> {
-    cynthia::future::block_on(async {
-        let _stream = TcpStream::connect("127.0.0.1:7000").await?;
-        std::io::Result::Ok(())
-    })
+#[cynthia::main]
+async fn main() -> swap::Result<()> {
+    let _stream = TcpStream::connect("127.0.0.1:7000").await?;
+    std::io::Result::Ok(())
 }
 
 #[allow(dead_code)]

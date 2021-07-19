@@ -22,13 +22,12 @@ fn get_string() -> swap::Result<String> {
     Ok(buffer)
 }
 
-fn main() -> swap::Result<()> {
-    runtime::block_on(async {
-        let listener = Async::<TcpListener>::bind(([127, 0, 0, 1], 8000))?;
-        get_string().unwrap();
-        loop {
-            let (stream, _peer_addr) = listener.accept().await?;
-            runtime::spawn(proxy(stream)).detach();
-        }
-    })
+#[cynthia::main]
+async fn main() -> swap::Result<()> {
+    let listener = Async::<TcpListener>::bind(([127, 0, 0, 1], 8000))?;
+    get_string().unwrap();
+    loop {
+        let (stream, _peer_addr) = listener.accept().await?;
+        runtime::spawn(proxy(stream)).detach();
+    }
 }
