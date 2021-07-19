@@ -6,6 +6,8 @@ use std::task::Waker;
 use crate::platform::parking::Parker;
 use crate::platform::waker::waker_fn;
 
+pub use cynthia_macros::main as _;
+
 #[cfg(feature = "std")]
 pub fn block_on<T>(future: impl Future<Output = T>) -> T {
     crate::pin!(future);
