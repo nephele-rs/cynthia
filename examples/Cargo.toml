@@ -13,7 +13,7 @@ nix = "0.21"
 timerfd = "1.1.1"
 
 [dependencies]
-cynthia = { version = "0.0.2", path = "../cynthia" }
+cynthia = { path = "../cynthia", features = ["full"] }
 once_cell = "1.4.1"
 bytes = "1.0.0"
 
@@ -42,3 +42,7 @@ path = "tcp_proxy.rs"
 [[example]]
 name = "tcp_connect"
 path = "tcp_connect.rs"
+
+[[example]]
+name = "wait_group"
+path = "wait_group.rs"

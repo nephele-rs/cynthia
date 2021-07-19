@@ -8,5 +8,4 @@ pub mod process;
 pub mod runtime;
 pub mod utils;
 
-#[macro_use]
 pub use cynthia_macros::main;
