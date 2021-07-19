@@ -65,3 +65,6 @@ libc = "0.2.78"
 inotify = { version = "0.9", default-features = false }
 nix = "0.21"
 timerfd = "1.1.1"
+
+[package.metadata.playground]
+features = ["full"]
