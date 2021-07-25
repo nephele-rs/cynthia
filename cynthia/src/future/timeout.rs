@@ -1,9 +1,9 @@
+use pin_project_lite::pin_project;
 use std::error::Error;
 use std::fmt;
 use std::future::Future;
 use std::pin::Pin;
 use std::time::Duration;
-use pin_project_lite::pin_project;
 
 use crate::runtime::task::{Context, Poll};
 use crate::utils::utils;

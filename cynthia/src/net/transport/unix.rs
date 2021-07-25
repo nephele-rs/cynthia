@@ -8,12 +8,12 @@ use std::os::unix::io::{AsRawFd, RawFd};
 #[cfg(windows)]
 use std::os::windows::io::{AsRawSocket, RawSocket};
 
+use std::os::unix::net::{self, SocketAddr};
 use std::panic::{RefUnwindSafe, UnwindSafe};
 use std::path::Path;
 use std::pin::Pin;
 use std::sync::Arc;
 use std::task::{Context, Poll};
-use std::os::unix::net::{self, SocketAddr};
 
 use crate::future::prelude::*;
 use crate::io::Async;

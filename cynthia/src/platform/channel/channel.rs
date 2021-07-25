@@ -1,12 +1,12 @@
 #![forbid(unsafe_code)]
 
+use futures_core::stream::Stream;
 use std::future::Future;
 use std::pin::Pin;
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::Arc;
 use std::task::{Context, Poll};
 use std::{error, fmt, process, usize};
-use futures_core::stream::Stream;
 
 use crate::platform::event::{Event, EventListener};
 use crate::platform::queue::{ConcurrentQueue, PopError, PushError};

@@ -1,10 +1,10 @@
 use std::ffi::OsStr;
 use std::path::Path;
 use std::pin::Pin;
+pub use std::process::{ExitStatus, Output, Stdio};
 use std::sync::{Arc, Mutex};
 use std::task::{Context, Poll};
 use std::{fmt, thread};
-pub use std::process::{ExitStatus, Output, Stdio};
 
 #[cfg(unix)]
 use crate::io::Async;

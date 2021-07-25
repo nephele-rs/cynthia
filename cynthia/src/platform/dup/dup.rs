@@ -1,12 +1,12 @@
 #![forbid(unsafe_code)]
 
+use futures_io::{AsyncRead, AsyncSeek, AsyncWrite};
 use std::fmt;
 use std::hash::{Hash, Hasher};
 use std::io::{self, IoSlice, IoSliceMut, SeekFrom};
 use std::ops::{Deref, DerefMut};
 use std::pin::Pin;
 use std::task::{Context, Poll};
-use futures_io::{AsyncRead, AsyncSeek, AsyncWrite};
 
 use crate::platform::mutex;
 

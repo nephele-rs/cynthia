@@ -1,3 +1,4 @@
+use once_cell::sync::Lazy;
 use std::any::Any;
 use std::collections::VecDeque;
 use std::io::{self, Read, Seek, SeekFrom, Write};
@@ -7,7 +8,6 @@ use std::sync::{Arc, Condvar, Mutex, MutexGuard};
 use std::task::{Context, Poll};
 use std::time::Duration;
 use std::{fmt, mem, panic, slice, thread};
-use once_cell::sync::Lazy;
 
 use crate::platform::atomic_waker::AtomicWaker;
 use crate::platform::channel::{bounded, Receiver};

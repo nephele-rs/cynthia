@@ -5,8 +5,7 @@
 #[cfg(feature = "std")]
 #[doc(hidden)]
 pub use crate::future::swap::{
-    AsyncBufRead, AsyncBufReadExt, AsyncRead, AsyncReadExt, 
-    AsyncSeek, AsyncSeekExt, AsyncWrite,
+    AsyncBufRead, AsyncBufReadExt, AsyncRead, AsyncReadExt, AsyncSeek, AsyncSeekExt, AsyncWrite,
     AsyncWriteExt,
 };
 #[doc(hidden)]

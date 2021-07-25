@@ -1,12 +1,12 @@
 #![cfg(feature = "std")]
 #![cfg_attr(not(feature = "std"), no_std)]
 
+use cfg_if::cfg_if;
 use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::Mutex;
 use std::time::Duration;
 use std::usize;
 use std::{fmt, io};
-use cfg_if::cfg_if;
 
 #[cfg(unix)]
 macro_rules! syscall {

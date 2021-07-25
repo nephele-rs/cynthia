@@ -1,9 +1,9 @@
 use std::time::Duration;
 
 use cynthia::runtime::connect::connect;
+use cynthia::runtime::polling::{Event, Poller};
 use cynthia::runtime::swap;
 use cynthia::runtime::transport::TcpStream;
-use cynthia::runtime::polling::{Event, Poller};
 
 #[cynthia::main]
 async fn main() -> swap::Result<()> {

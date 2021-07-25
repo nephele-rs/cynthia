@@ -21,5 +21,5 @@ pub use executor::{Executor, MonoExecutor};
 mod local;
 pub use local::LocalExecutor;
 
-pub use crate::net::transport::{Incoming, TcpListener, TcpStream};
 pub use crate::net::transport::UdpSocket;
+pub use crate::net::transport::{Incoming, TcpListener, TcpStream};

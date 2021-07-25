@@ -1,4 +1,6 @@
+use futures_core::stream::Stream;
 pub use futures_io::{AsyncBufRead, AsyncRead, AsyncSeek, AsyncWrite};
+use pin_project_lite::pin_project;
 use std::future::Future;
 pub use std::io::{Error, ErrorKind, Result, SeekFrom};
 use std::io::{IoSlice, IoSliceMut};
@@ -6,8 +8,6 @@ use std::pin::Pin;
 use std::sync::{Arc, Mutex};
 use std::task::{Context, Poll};
 use std::{cmp, fmt, mem};
-use futures_core::stream::Stream;
-use pin_project_lite::pin_project;
 
 use crate::ready;
 

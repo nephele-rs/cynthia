@@ -15,8 +15,8 @@ use std::sync::Arc;
 use std::task::{Context, Poll};
 
 use crate::io::Async;
-use crate::{future::prelude::*, ready};
 use crate::net::transport::addr::AsyncToSocketAddrs;
+use crate::{future::prelude::*, ready};
 
 #[derive(Clone, Debug)]
 pub struct TcpListener {

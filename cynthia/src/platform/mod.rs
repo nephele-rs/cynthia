@@ -1,4 +1,5 @@
 pub mod atomic_waker;
+pub mod byte_pool;
 pub mod channel;
 pub mod dup;
 pub mod event;

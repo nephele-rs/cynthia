@@ -1,5 +1,5 @@
-use std::net::{TcpStream, TcpListener};
 use cynthia::runtime::{self, swap, Async};
+use std::net::{TcpListener, TcpStream};
 
 async fn echo(stream: Async<TcpStream>) -> swap::Result<()> {
     swap::copy(&stream, &mut &stream).await?;

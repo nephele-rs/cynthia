@@ -7,12 +7,12 @@ use std::sync::{Arc, Mutex, RwLock};
 use std::task::{Poll, Waker};
 
 use crate::future::{future, prelude::*};
+use crate::io::reactor::Reactor;
 use crate::platform::queue::ConcurrentQueue;
 use crate::platform::waker::Sleeper;
 use crate::runtime::task::Runnable;
-use crate::utils::{rander, Colo};
-use crate::io::reactor::Reactor;
 use crate::runtime::task::{self, Task};
+use crate::utils::{rander, Colo};
 
 #[derive(Debug)]
 pub struct State {
