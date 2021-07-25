@@ -6,6 +6,7 @@ pub use {
 
 pub use {
     crate::net::{connect, polling, transport},
+    crate::platform::byte_pool::{Allocate, ByteBuffer, BytePool, Realloc},
     crate::platform::{channel, dup, wait_group::WaitGroup},
 };
 
