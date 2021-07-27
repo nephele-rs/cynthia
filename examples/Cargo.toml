@@ -37,6 +37,10 @@ name = "channel"
 path = "channel.rs"
 
 [[example]]
+name = "dns"
+path = "dns.rs"
+
+[[example]]
 name = "tcp_echo"
 path = "tcp_echo.rs"
 
