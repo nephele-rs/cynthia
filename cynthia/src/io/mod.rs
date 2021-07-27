@@ -22,6 +22,7 @@ use crate::future::swap::{AsyncRead, AsyncWrite};
 use crate::io::reactor::{Reactor, Source};
 use crate::net::connect::connect;
 use crate::{future::future, pin, ready};
+use crate::net::transport::{resolve, AsyncToSocketAddrs};
 
 pub mod reactor;
 mod worker;
@@ -471,7 +472,25 @@ where
 }
 
 impl Async<TcpListener> {
-    pub fn bind<A: Into<SocketAddr>>(addr: A) -> io::Result<Async<TcpListener>> {
+    pub async fn bind<A: AsyncToSocketAddrs>(addr: A) -> io::Result<Async<TcpListener>> {
+        let addrs = resolve(addr).await?;
+        let mut last_err = None;
+        for addr in addrs {
+            match TcpListener::bind(addr) {
+                Ok(listener) => return Ok(Async::new(listener)?),
+                Err(e) => last_err = Some(e),
+            }
+        }
+
+        Err(last_err.unwrap_or_else(|| {
+            io::Error::new(
+                io::ErrorKind::InvalidInput,
+                "could not resolve to any address",
+            )
+        }))
+    }
+
+    pub fn bind_addr<A: Into<SocketAddr>>(addr: A) -> io::Result<Async<TcpListener>> {
         let addr = addr.into();
         Ok(Async::new(TcpListener::bind(addr)?)?)
     }
@@ -498,7 +517,32 @@ impl TryFrom<std::net::TcpListener> for Async<std::net::TcpListener> {
 }
 
 impl Async<TcpStream> {
-    pub async fn connect<A: Into<SocketAddr>>(addr: A) -> io::Result<Async<TcpStream>> {
+    pub async fn connect<A: AsyncToSocketAddrs>(addr: A) -> io::Result<Async<TcpStream>> {
+        let addrs = resolve(addr).await?;
+        let mut last_err = None;
+        for addr in addrs {
+            match connect::tcp(addr) {
+                Ok(fd) => {
+                    let stream = Async::new(fd)?;
+                    stream.writable().await?;
+                    match stream.get_ref().take_error()? {
+                        None => return Ok(stream),
+                        Some(err) => return Err(err),
+                    }
+                }
+                Err(e) => last_err = Some(e),
+            }
+        }
+
+        Err(last_err.unwrap_or_else(|| {
+            io::Error::new(
+                io::ErrorKind::InvalidInput,
+                "could not resolve to any address",
+            )
+        }))
+    }
+
+    pub async fn connect_addr<A: Into<SocketAddr>>(addr: A) -> io::Result<Async<TcpStream>> {
         let stream = Async::new(connect::tcp(addr)?)?;
 
         stream.writable().await?;

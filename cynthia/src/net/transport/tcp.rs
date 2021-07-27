@@ -32,7 +32,7 @@ impl TcpListener {
         let mut last_err = None;
 
         for addr in addr.to_socket_addrs().await? {
-            match Async::<std::net::TcpListener>::bind(addr) {
+            match Async::<std::net::TcpListener>::bind_addr(addr) {
                 Ok(listener) => return Ok(TcpListener::new(Arc::new(listener))),
                 Err(err) => last_err = Some(err),
             }
@@ -161,7 +161,7 @@ impl TcpStream {
         let mut last_err = None;
 
         for addr in addr.to_socket_addrs().await? {
-            match Async::<std::net::TcpStream>::connect(addr).await {
+            match Async::<std::net::TcpStream>::connect_addr(addr).await {
                 Ok(stream) => return Ok(TcpStream::new(Arc::new(stream))),
                 Err(e) => last_err = Some(e),
             }

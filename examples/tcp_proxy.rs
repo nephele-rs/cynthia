@@ -3,7 +3,7 @@ use std::net::{TcpListener, TcpStream};
 use cynthia::runtime::{self, future, swap, Async};
 
 async fn proxy(inbound: Async<TcpStream>) -> swap::Result<()> {
-    let outbound = Async::<TcpStream>::connect(([127, 0, 0, 1], 7000)).await?;
+    let outbound = Async::<TcpStream>::connect("127.0.0.1:7000").await?;
 
     let downstream = async { swap::copy(&inbound, &outbound).await };
 
@@ -24,7 +24,7 @@ fn get_string() -> swap::Result<String> {
 
 #[cynthia::main]
 async fn main() -> swap::Result<()> {
-    let listener = Async::<TcpListener>::bind(([127, 0, 0, 1], 8000))?;
+    let listener = Async::<TcpListener>::bind("127.0.0.1:8000").await?;
     get_string().unwrap();
     loop {
         let (stream, _peer_addr) = listener.accept().await?;

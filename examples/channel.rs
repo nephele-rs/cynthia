@@ -40,7 +40,7 @@ async fn handle(stream: Async<TcpStream>) -> Result<()> {
 
 #[cynthia::main]
 async fn main() -> Result<()> {
-    let listener = Async::<TcpListener>::bind(([127, 0, 0, 1], 7000))?;
+    let listener = Async::<TcpListener>::bind("127.0.0.1:7000").await?;
     loop {
         let (stream, _peer_addr) = listener.accept().await?;
         runtime::spawn(handle(stream)).detach();
