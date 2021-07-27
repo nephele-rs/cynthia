@@ -9,6 +9,7 @@ async fn process(i: i32) -> Result<()> {
     println!("hello process {}", i);
     Ok(())
 }
+
 async fn handle(stream: Async<TcpStream>) -> Result<()> {
     let wg = WaitGroup::new();
 

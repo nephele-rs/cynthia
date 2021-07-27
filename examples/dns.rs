@@ -1,6 +1,6 @@
 use anyhow::{Context as _, Result};
-use std::net::{ToSocketAddrs};
 use cynthia::runtime::transport::resolve;
+use std::net::ToSocketAddrs;
 
 #[cynthia::main]
 async fn main() -> Result<()> {
