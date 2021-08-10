@@ -42,6 +42,10 @@ name = "tcp_proxy"
 path = "tcp_proxy.rs"
 
 [[example]]
+name = "tcp_service"
+path = "tcp_service.rs"
+
+[[example]]
 name = "tcp_connect"
 path = "tcp_connect.rs"
 
