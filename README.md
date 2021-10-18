@@ -51,7 +51,7 @@ async fn main() -> swap::Result<()> {
 }
 ```
 
-More examples can be found [here](https://github.com/nephele-rs/cynthia/tree/main/examples)
+More examples can be found [here](https://github.com/nephele-rs/cynthia/tree/main/examples).
 
 # Supported Rust Versions
 This library is verified to work in rustc 1.51.0 (nightly), and the support of other versions needs more testing.
