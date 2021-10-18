@@ -12,13 +12,15 @@ cynthia is a simple, event-driven, non-blocking I/O platform for writing asynchr
 A basic TCP echo server with cynthia.
 
 Make sure you activated the full features of the cynthia crate on Cargo.toml:
-```
+
+```toml
 [dependencies]
 cynthia = { version = "0.0.6", features = ["full"]}
 ```
 
 Then, on your main.rs:
-```
+
+```rust,no_run
 use std::net::{TcpListener, TcpStream};
 
 use cynthia::future::prelude::*;
