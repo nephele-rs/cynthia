@@ -3,7 +3,7 @@ use std::os::windows::io::RawSocket;
 use std::sync::atomic::{AtomicBool, Ordering};
 use std::time::{Duration, Instant};
 use std::{io, ptr};
-use wepoll_sys as we;
+use wepoll_ffi as we;
 use winapi::ctypes;
 
 use crate::Event;

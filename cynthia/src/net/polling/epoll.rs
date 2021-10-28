@@ -3,7 +3,7 @@ use std::os::unix::io::RawFd;
 use std::time::Duration;
 use std::{io, ptr};
 
-use crate::Event;
+use crate::net::polling::{self, Event};
 
 pub struct Events {
     list: Box<[libc::epoll_event]>,
@@ -72,13 +72,13 @@ impl Poller {
         };
 
         if let Some(timer_fd) = timer_fd {
-            poller.add(timer_fd, Event::none(crate::NOTIFY_KEY))?;
+            poller.add(timer_fd, Event::none(polling::NOTIFY_KEY))?;
         }
 
         poller.add(
             event_fd,
             Event {
-                key: crate::NOTIFY_KEY,
+                key: polling::NOTIFY_KEY,
                 readable: true,
                 writable: false,
             },
@@ -88,24 +88,24 @@ impl Poller {
     }
 
     pub fn add(&self, fd: RawFd, ev: Event) -> io::Result<()> {
-        self.ctl(std::libc::EPOLL_CTL_ADD, fd, Some(ev))
+        self.ctl(libc::EPOLL_CTL_ADD, fd, Some(ev))
     }
 
     pub fn modify(&self, fd: RawFd, ev: Event) -> io::Result<()> {
-        self.ctl(std::libc::EPOLL_CTL_MOD, fd, Some(ev))
+        self.ctl(libc::EPOLL_CTL_MOD, fd, Some(ev))
     }
 
     pub fn delete(&self, fd: RawFd) -> io::Result<()> {
-        self.ctl(std::libc::EPOLL_CTL_DEL, fd, None)
+        self.ctl(libc::EPOLL_CTL_DEL, fd, None)
     }
 
     pub fn wait(&self, events: &mut Events, timeout: Option<Duration>) -> io::Result<()> {
         if let Some(timer_fd) = self.timer_fd {
-            let new_val = std::libc::itimerspec {
+            let new_val = libc::itimerspec {
                 it_interval: TS_ZERO,
                 it_value: match timeout {
                     None => TS_ZERO,
-                    Some(t) => std::libc::timespec {
+                    Some(t) => libc::timespec {
                         tv_sec: t.as_secs() as libc::time_t,
                         tv_nsec: (t.subsec_nanos() as libc::c_long).into(),
                     },
@@ -123,7 +123,7 @@ impl Poller {
             self.modify(
                 timer_fd,
                 Event {
-                    key: crate::NOTIFY_KEY,
+                    key: polling::NOTIFY_KEY,
                     readable: true,
                     writable: false,
                 },
@@ -159,7 +159,7 @@ impl Poller {
         self.modify(
             self.event_fd,
             Event {
-                key: crate::NOTIFY_KEY,
+                key: polling::NOTIFY_KEY,
                 readable: true,
                 writable: false,
             },
